@@ -23,3 +23,8 @@ create-virtual-environment:
 activate-virtual-environment:
 	@echo "Activating virtual environment..."
 	./activate_venv.sh
+
+.PHONY: run-main
+run-main:
+	@echo "Running main..."
+	PYTHONPATH=$(PROJECT_DIR) $(PYTHON) src/main.py
