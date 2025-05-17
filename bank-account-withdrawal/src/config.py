@@ -12,7 +12,6 @@ logging.basicConfig(
 # Global constants
 LOGGER = logging.getLogger(__name__)
 KAFKA_BROKER = "localhost:9092"
-KAFKA_TOPIC = "bank_account_withdrawal"
 
 
 def initialize_database():
