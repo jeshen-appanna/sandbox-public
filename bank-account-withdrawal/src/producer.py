@@ -1,3 +1,5 @@
+"""Kafka event producer for the Bank Account Withdrawal application."""
+
 import json
 import time
 
@@ -9,8 +11,15 @@ _PRODUCER = KafkaProducer(bootstrap_servers=KAFKA_BROKER, value_serializer=lambd
 _KAFKA_TOPIC = "bank_account_withdrawal"
 
 
-def publish_event(event: WithdrawalEvent, retries: int = 3, backoff: int = 2):
-    """Attempts to publish event with automatic retries."""
+def publish_event(event: WithdrawalEvent, retries: int = 3, backoff: int = 2) -> None:
+    """
+    Publishes a withdrawal event to Kafka with retry mechanisms.
+
+    Arguments:
+        event: The withdrawal event to be published.
+        retries: Maximum number of retries upon failure. Defaults to 3.
+        backoff: Initial backoff duration in seconds. Defaults to 2.
+    """
     attempt = 0
     while attempt < retries:
         try:

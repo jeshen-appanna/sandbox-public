@@ -1,3 +1,5 @@
+"""Main module for the Bank Account Withdrawal application."""
+
 from decimal import Decimal
 from random import randint
 
@@ -10,6 +12,12 @@ from controller import BankAccountController
 
 
 def initialize_sample_data() -> None:
+    """
+    Populates the database with sample account data.
+
+    Creates five accounts with random balances and ensures duplicates
+    are ignored when inserting records.
+    """
     with SessionLocal() as session:
         for account_id in range(1, 6):
             statement = (
@@ -25,11 +33,23 @@ def initialize_sample_data() -> None:
 
 
 def get_all_accounts() -> list[Account]:
+    """
+    Retrieves all bank accounts from the database.
+
+    Returns:
+        A list of account objects, sorted by account ID.
+    """
     with SessionLocal() as session:
         return session.query(Account).order_by(Account.id).all()
 
 
 def print_accounts(accounts: list[Account]) -> None:
+    """
+    Displays all accounts and their balances in a formatted table.
+
+    Arguments:
+        accounts: List of account objects to display.
+    """
     table = PrettyTable()
     table.field_names = ["Account ID", "Balance"]
 
@@ -39,6 +59,12 @@ def print_accounts(accounts: list[Account]) -> None:
 
 
 def main():
+    """
+    Runs the Bank Account Withdrawal application.
+
+    Initializes the database, populates sample accounts, and provides an interactive
+    command-line interface for users to withdraw funds.
+    """
     config.initialize_database()
     initialize_sample_data()
 

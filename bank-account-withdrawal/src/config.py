@@ -1,3 +1,7 @@
+"""
+Configuration module for the Bank Account Withdrawal application.
+"""
+
 import logging
 
 from models import Base, engine
@@ -14,6 +18,7 @@ LOGGER = logging.getLogger(__name__)
 KAFKA_BROKER = "localhost:9092"
 
 
-def initialize_database():
+def initialize_database() -> None:
+    """Creates database tables using SQLAlchemy models."""
     Base.metadata.create_all(engine)
     print("Database and table initialized successfully.")

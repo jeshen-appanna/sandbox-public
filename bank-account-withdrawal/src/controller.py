@@ -1,3 +1,5 @@
+"""Bank Account Controller module for handling transactions."""
+
 from decimal import Decimal
 from enum import Enum
 
@@ -8,9 +10,12 @@ from producer import publish_event
 from sqlalchemy.exc import SQLAlchemyError
 
 _ZERO_AMOUNT = Decimal("0")
+"""Represents zero, used for validation checks."""
 
 
 class WithdrawalStatus(str, Enum):
+    """Enumeration for possible withdrawal statuses."""
+
     INVALID_AMOUNT = "invalid_withdrawal_amount"
     ACCOUNT_NOT_FOUND = "account_not_found"
     SUCCESS = "withdrawal_successful"
@@ -19,7 +24,19 @@ class WithdrawalStatus(str, Enum):
 
 
 class BankAccountController:
+    """Handles transactions for bank accounts."""
+
     def withdraw(account_id: int, amount: Decimal) -> WithdrawalStatus:
+        """
+        Processes a withdrawal transaction.
+
+        Arguments:
+            account_id: The unique identifier for the account.
+            amount: The amount to withdraw.
+
+        Returns:
+            The status of the withdrawal transaction.
+        """
         if amount <= _ZERO_AMOUNT:
             LOGGER.warning("Invalid withdrawal amount.")
             return WithdrawalStatus.INVALID_AMOUNT

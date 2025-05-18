@@ -12,6 +12,7 @@ help:
 	@echo "Makefile commands:"
 	@echo "  create-virtual-environment:  Create and set up the virtual environment with dependencies."
 	@echo "  activate-virtual-environment: Activate the virtual environment."
+	@echo "  run-main: Run application."
 
 .PHONY: create-virtual-environment
 create-virtual-environment:
