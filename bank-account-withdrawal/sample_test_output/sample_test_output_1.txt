@@ -1,0 +1,61 @@
+┌──(venv)(jeshen㉿JESHEN-HP-ENVY)-[/mnt/c/workspace/sandbox-public/bank-account-withdrawal]
+└─$ make run-main
+make[1]: Entering directory '/mnt/c/workspace/sandbox-public/bank-account-withdrawal'
+Running main...
+PYTHONPATH=. venv/bin/python src/main.py
+2025-05-19 21:23:26,896 - kafka.conn - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to localhost:9092 [('127.0.0.1', 9092) IPv4]
+2025-05-19 21:23:26,903 - kafka.conn - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv4 ('127.0.0.1', 9092)]>: Broker version identified as 2.6
+2025-05-19 21:23:26,903 - kafka.conn - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+Database and table initialized successfully.
+
+Available Accounts:
++------------+-------------+---------+----------------------------+----------------------------+
+| Account ID | Customer ID | Balance |        Date Created        |       Date Modified        |
++------------+-------------+---------+----------------------------+----------------------------+
+|     1      |     9099    |  899.00 | 2025-05-19 21:23:26.935667 | 2025-05-19 21:23:26.935680 |
+|     2      |    18198    |  861.00 | 2025-05-19 21:23:26.940795 | 2025-05-19 21:23:26.940798 |
+|     3      |    27297    |  203.00 | 2025-05-19 21:23:26.941270 | 2025-05-19 21:23:26.941272 |
+|     4      |    36396    |  649.00 | 2025-05-19 21:23:26.941503 | 2025-05-19 21:23:26.941505 |
+|     5      |    45495    |  879.00 | 2025-05-19 21:23:26.941723 | 2025-05-19 21:23:26.941725 |
++------------+-------------+---------+----------------------------+----------------------------+
+Enter Account ID to withdraw money from: 1
+Enter amount to withdraw: 22
+2025-05-19 21:23:54,851 - config - INFO - Withdrawal successful for account 1, amount: 22.
+2025-05-19 21:23:54,853 - kafka.conn - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=1002 host=localhost:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to localhost:9092 [('127.0.0.1', 9092) IPv4]
+2025-05-19 21:23:54,854 - kafka.conn - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=1002 host=localhost:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+2025-05-19 21:23:54,855 - kafka.conn - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Closing connection.
+2025-05-19 21:23:54,862 - config - INFO - Event published to Kafka. {"account_id": 1, "amount": "22", "status": "withdrawal_successful", "timestamp": "2025-05-19T21:23:54.851956+02:00"}
+Do you want to perform another withdrawal? (y/n): y
+
+Available Accounts:
++------------+-------------+---------+----------------------------+----------------------------+
+| Account ID | Customer ID | Balance |        Date Created        |       Date Modified        |
++------------+-------------+---------+----------------------------+----------------------------+
+|     1      |     9099    |  877.00 | 2025-05-19 21:23:26.935667 | 2025-05-19 21:23:54.821245 |
+|     2      |    18198    |  861.00 | 2025-05-19 21:23:26.940795 | 2025-05-19 21:23:26.940798 |
+|     3      |    27297    |  203.00 | 2025-05-19 21:23:26.941270 | 2025-05-19 21:23:26.941272 |
+|     4      |    36396    |  649.00 | 2025-05-19 21:23:26.941503 | 2025-05-19 21:23:26.941505 |
+|     5      |    45495    |  879.00 | 2025-05-19 21:23:26.941723 | 2025-05-19 21:23:26.941725 |
++------------+-------------+---------+----------------------------+----------------------------+
+Enter Account ID to withdraw money from: 2
+Enter amount to withdraw: 12121212121
+2025-05-19 21:25:10,542 - config - WARNING - Insufficient funds for account 2.
+Do you want to perform another withdrawal? (y/n): y
+
+Available Accounts:
++------------+-------------+---------+----------------------------+----------------------------+
+| Account ID | Customer ID | Balance |        Date Created        |       Date Modified        |
++------------+-------------+---------+----------------------------+----------------------------+
+|     1      |     9099    |  877.00 | 2025-05-19 21:23:26.935667 | 2025-05-19 21:23:54.821245 |
+|     2      |    18198    |  861.00 | 2025-05-19 21:23:26.940795 | 2025-05-19 21:23:26.940798 |
+|     3      |    27297    |  203.00 | 2025-05-19 21:23:26.941270 | 2025-05-19 21:23:26.941272 |
+|     4      |    36396    |  649.00 | 2025-05-19 21:23:26.941503 | 2025-05-19 21:23:26.941505 |
+|     5      |    45495    |  879.00 | 2025-05-19 21:23:26.941723 | 2025-05-19 21:23:26.941725 |
++------------+-------------+---------+----------------------------+----------------------------+
+Enter Account ID to withdraw money from: 2
+Enter amount to withdraw: 455
+2025-05-19 21:25:24,185 - config - INFO - Withdrawal successful for account 2, amount: 455.
+2025-05-19 21:25:24,190 - config - INFO - Event published to Kafka. {"account_id": 2, "amount": "455", "status": "withdrawal_successful", "timestamp": "2025-05-19T21:25:24.186454+02:00"}
+Do you want to perform another withdrawal? (y/n): n
+Exiting...
+make[1]: Leaving directory '/mnt/c/workspace/sandbox-public/bank-account-withdrawal'
