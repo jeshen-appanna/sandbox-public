@@ -3,6 +3,7 @@ Configuration module for the Bank Account Withdrawal application.
 """
 
 import logging
+from datetime import timedelta, timezone
 
 from models import Base, engine
 
@@ -16,6 +17,7 @@ logging.basicConfig(
 # Global constants
 LOGGER = logging.getLogger(__name__)
 KAFKA_BROKER = "localhost:9092"
+SAST_TIMEZONE = timezone(timedelta(hours=2))
 
 
 def initialize_database() -> None:

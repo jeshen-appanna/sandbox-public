@@ -1,7 +1,10 @@
 """Events module for the Bank Account Withdrawal application."""
 
-from decimal import Decimal
 import json
+from datetime import datetime
+from decimal import Decimal
+
+from config import SAST_TIMEZONE
 
 
 class WithdrawalEvent:
@@ -15,10 +18,12 @@ class WithdrawalEvent:
             account_id: The unique identifier for the account.
             amount: The amount withdrawn.
             status: The status of the withdrawal transaction.
+            timestamp: The timestamp of the event in ISO format (SAST).
         """
         self.account_id = account_id
         self.amount = amount
         self.status = status
+        self.timestamp = datetime.now(SAST_TIMEZONE).isoformat()
 
     def to_json(self):
         """
@@ -27,4 +32,11 @@ class WithdrawalEvent:
         Returns:
             The serialized JSON representation of the withdrawal event.
         """
-        return json.dumps({"account_id": self.account_id, "amount": str(self.amount), "status": self.status})
+        return json.dumps(
+            {
+                "account_id": self.account_id,
+                "amount": str(self.amount),
+                "status": self.status,
+                "timestamp": self.timestamp,
+            }
+        )

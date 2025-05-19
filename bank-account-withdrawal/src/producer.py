@@ -33,7 +33,7 @@ def publish_event(event: WithdrawalEvent, retries: int = 3, backoff: int = 2) ->
             attempt += 1
         else:
             _PRODUCER.flush()
-            LOGGER.info("Event published to Kafka.")
+            LOGGER.info(f"Event published to Kafka. {event.to_json()}")
             return
 
     LOGGER.error("Kafka event publishing failed after retries.")

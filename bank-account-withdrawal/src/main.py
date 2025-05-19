@@ -19,11 +19,11 @@ def initialize_sample_data() -> None:
     are ignored when inserting records.
     """
     with SessionLocal() as session:
-        for account_id in range(1, 6):
+        for id in range(1, 6):
             statement = (
                 insert(Account)
                 .values(
-                    id=account_id,
+                    customer_id=id * 9099,
                     balance=Decimal(str(randint(100, 1000))),
                 )
                 .prefix_with("OR IGNORE")
@@ -51,10 +51,12 @@ def print_accounts(accounts: list[Account]) -> None:
         accounts: List of account objects to display.
     """
     table = PrettyTable()
-    table.field_names = ["Account ID", "Balance"]
+    table.field_names = ["Account ID", "Customer ID", "Balance", "Date Created", "Date Modified"]
 
     for account in accounts:
-        table.add_row([account.id, f"{account.balance:.2f}"])
+        table.add_row(
+            [account.id, account.customer_id, f"{account.balance:.2f}", account.date_created, account.date_modified]
+        )
     print(table)
 
 
