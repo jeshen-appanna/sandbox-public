@@ -13,5 +13,6 @@ structlog.configure(processors=[structlog.processors.TimeStamper(fmt="iso"), str
 
 LOGGER = structlog.get_logger()
 MEMCACHE_CLIENT = Client(("memcached", 11211))
+MEMCACHE_TLL = 3600  # 1 hour
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 GOOGLE_API_URL = f"https://www.googleapis.com/geolocation/v1/geolocate?key={GOOGLE_API_KEY}"
