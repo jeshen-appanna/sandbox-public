@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+requests
+pymemcache
+structlog
+tenacity
+python-dotenv
